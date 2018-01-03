@@ -1,3 +1,4 @@
+import { StorageService } from './../services/storage.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
@@ -30,7 +31,8 @@ import {ErrorInterceptorProvider} from '../interceptors/error-interceptor';
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     ErrorInterceptorProvider,
     CategoriaService,
-    AuthService
+    AuthService,
+    StorageService
   ]
 })
 export class AppModule {}

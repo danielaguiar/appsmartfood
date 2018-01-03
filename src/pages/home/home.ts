@@ -46,14 +46,13 @@ export class HomePage extends AppAbstractBaseComponent {
   login() {
     this.auth.authenticate(this.creds)
       .subscribe(response => {
-        console.log(response);  
-        //this.auth.successfulLogin(response.headers.get('Authorization'));
+        this.auth.successfulLogin(response.headers.get('Authorization'));
+        this.navCtrl.setRoot(this.paginas.categorias);
       },
       error => console.log(error));    
-      this.navCtrl.setRoot(this.paginas.categorias);
   }
  
   signup() {
-   // this.navCtrl.push('SignupPage');
+    this.navCtrl.push(this.paginas.signup);
   }
 }

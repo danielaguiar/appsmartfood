@@ -29,11 +29,7 @@ export class CategoriasPage {
   }
 
   ionViewDidLoad() {
-    this.categoriaService.findAll()
-      .subscribe(response => {
-        this.items = response;
-      },
-      error => {});
+    this.categoriaService.findAll().subscribe(response => this.items = response,error => {});
   }
 
   showProdutos(categoria_id : string) {
