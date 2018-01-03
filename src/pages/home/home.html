@@ -9,12 +9,12 @@
   <form>
     <ion-item>
       <ion-label stacked>{{frmLogin.label.login}}</ion-label>
-      <ion-input type="text"></ion-input>
+      <ion-input type="text" [(ngModel)]="creds.email" name = "email" ></ion-input>
     </ion-item>
 
     <ion-item>
         <ion-label stacked>{{frmLogin.label.password}}</ion-label>
-        <ion-input type="password"></ion-input>
+        <ion-input type="password" [(ngModel)]="creds.senha" name = "senha"></ion-input>
     </ion-item>
     <button ion-button block (click)="login()" >{{frmLogin.btn.enter}}</button>
     <button ion-button block outline >{{frmLogin.btn.register}}</button>

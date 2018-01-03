@@ -21,7 +21,8 @@ export class MyApp extends AppAbstractBaseComponent {
 
     // used for an example of ngFor and navigation
     this.pages = [
-      { title: 'Home', component: this.paginas.home }
+      { title: 'Categorias', component: this.paginas.categorias },
+      { title: 'Profile', component: this.paginas.profile }
     ];
 
   }

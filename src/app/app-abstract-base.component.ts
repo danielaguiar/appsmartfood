@@ -3,6 +3,7 @@ export abstract class AppAbstractBaseComponent {
     public paginas: any = {
         home: 'HomePage',
         categorias: 'CategoriasPage',
+        profile: 'ProfilePage',
         signup : 'SignupPage'
     };
 
