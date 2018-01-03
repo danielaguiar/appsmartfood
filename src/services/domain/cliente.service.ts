@@ -14,9 +14,7 @@ export class ClienteService {
         
     }
     findByEmail(email: string):Observable<ClienteDTO>{
-        let token = this.storage.getLocalUser().token;
-        let authoHeader = new HttpHeaders({'Authorization':'Bearer ' + token});
-        return this.http.get<ClienteDTO>(`${API_CONFIG.baseUrl}/clientes/email?value=${email}`,{'headers': authoHeader})
+        return this.http.get<ClienteDTO>(`${API_CONFIG.baseUrl}/clientes/email?value=${email}`);
     }
 
     getImageFromBucket(id:String) : Observable<any>{
