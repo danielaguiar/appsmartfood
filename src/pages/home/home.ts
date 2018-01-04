@@ -33,14 +33,15 @@ export class HomePage extends AppAbstractBaseComponent {
   }
 
   ionViewDidEnter() {
-    /*
+
     this.auth.refreshToken()
       .subscribe(response => {
+        console.log(response);
         this.auth.successfulLogin(response.headers.get('Authorization'));
-        this.navCtrl.setRoot('CategoriasPage');
+        this.navCtrl.setRoot(this.paginas.categorias);
       },
-      error => {});  
-      */
+      error => { });
+
   }
 
   login() {
