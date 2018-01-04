@@ -13,59 +13,38 @@ export class ErrorInterceptor implements HttpInterceptor {
 
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         return next.handle(req)
-            .catch((error, caught) => {
-                let statusCod: number = 0;
+        .catch((error, caught) => {
 
-                let errorObj = error;
-                if (errorObj.error) {
-                    errorObj = errorObj.error;
-                    if (!errorObj.status && errorObj.status != undefined) {
-                        errorObj = JSON.parse(errorObj);
-                        statusCod = errorObj.status;
-                    }
-                }
+            let errorObj = error;
+            if (errorObj.error) {
+                errorObj = errorObj.error;
+            }
+            if (!errorObj.status) {
+                errorObj = JSON.parse(errorObj);
+            }
+            switch(errorObj.status) {
+                case 401:
+                this.handle401();
+                break;
 
+                case 403:
+                this.handle403();
+                break;
 
-                console.log("Erro detectado pelo interceptor:");
-                console.log(errorObj);
+                case 422:
+                this.handle422(errorObj);
+                break;
 
-                switch (statusCod) {
-                    case 0:
-                        this.handle0();
-                        break;
+                default:
+                this.handleDefaultEror(errorObj);
+            }
 
-                    case 401:
-                        this.handle401();
-                        break;
-
-                    case 403:
-                        this.handle403();
-                        break;
-
-                    case 422:
-                        this.handle422(errorObj);
-                        break;
-
-                    default:
-                        this.handleDefaultEror(errorObj);
-                }
-
-                return Observable.throw(errorObj);
-            }) as any;
+            return Observable.throw(errorObj);
+        }) as any;
     }
 
-    handle0() {
-        let alert = this.alertCtrl.create({
-            title: 'Erro 0: falha de rede',
-            message: 'Favor verificar conexão de rede',
-            enableBackdropDismiss: false,
-            buttons: [
-                {
-                    text: 'Ok'
-                }
-            ]
-        });
-        alert.present();
+    handle403() {
+        this.storage.setLocalUser(null);
     }
 
     handle401() {
@@ -82,9 +61,6 @@ export class ErrorInterceptor implements HttpInterceptor {
         alert.present();
     }
 
-    handle403() {
-        this.storage.setLocalUser(null);
-    }
     handle422(errorObj) {
         let alert = this.alertCtrl.create({
             title: 'Erro 422: Validação',
@@ -110,12 +86,12 @@ export class ErrorInterceptor implements HttpInterceptor {
                 }
             ]
         });
-        alert.present();
+        alert.present();        
     }
 
-    private listErrors(messages: FieldMessage[]): string {
-        let s: string = '';
-        for (var i = 0; i < messages.length; i++) {
+    private listErrors(messages : FieldMessage[]) : string {
+        let s : string = '';
+        for (var i=0; i<messages.length; i++) {
             s = s + '<p><strong>' + messages[i].fieldName + "</strong>: " + messages[i].message + '</p>';
         }
         return s;

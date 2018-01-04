@@ -1,30 +1,34 @@
-import { AuthService } from './../services/auth.service';
 import { Component, ViewChild } from '@angular/core';
 import { Nav, Platform } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
-
+import { AuthService } from '../services/auth.service';
 import { AppAbstractBaseComponent } from './app-abstract-base.component';
 
 @Component({
   templateUrl: 'app.html'
 })
-export class MyApp extends AppAbstractBaseComponent {
+export class MyApp extends AppAbstractBaseComponent{
   @ViewChild(Nav) nav: Nav;
 
-  rootPage: string = this.paginas.home;
+  rootPage: string = 'HomePage';
 
-  pages: Array<{ title: string, component: any }>;
+  pages: Array<{ title: string, component: string }>;
 
-  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen, public auth: AuthService) {
-    super()
+  constructor(
+    public platform: Platform,
+    public statusBar: StatusBar,
+    public splashScreen: SplashScreen,
+    public auth: AuthService
+  ) {
+    super();
     this.initializeApp();
 
     // used for an example of ngFor and navigation
     this.pages = [
       { title: 'Categorias', component: this.paginas.categorias },
       { title: 'Profile', component: this.paginas.profile },
-      { title: 'Sair', component: '' }
+      { title: 'Logout', component: '' }
     ];
 
   }
@@ -38,13 +42,16 @@ export class MyApp extends AppAbstractBaseComponent {
     });
   }
 
-  openPage(page: {title: string, component: string }) {
-    let pagina = page.component;
-    if (page.title = 'Sair') {
-      console.log('saindo');
-      this.auth.logout();
-      pagina = this.paginas.home;
+  openPage(page: { title: string, component: string }) {
+
+    switch (page.title) {
+      case 'Logout':
+        this.auth.logout();
+        this.nav.setRoot('HomePage');
+        break;
+
+      default:
+        this.nav.setRoot(page.component);
     }
-    this.nav.setRoot(pagina);
   }
 }

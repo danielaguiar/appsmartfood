@@ -26,11 +26,9 @@ export class ProfilePage extends AppAbstractBaseComponent {
 
   ionViewDidLoad() {
     let localUser = this.storage.getLocalUser();
-    console.log(localUser.email);
     if (localUser && localUser.email) {
       this.clienteService.findByEmail(localUser.email).subscribe(
         response => {
-          console.log(response);
           this.cliente = response;
           this.getImageIfExists();
         },

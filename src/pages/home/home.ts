@@ -12,6 +12,8 @@ import { AppAbstractBaseComponent } from '../../app/app-abstract-base.component'
 })
 export class HomePage extends AppAbstractBaseComponent {
 
+
+
   creds: CredenciaisDTO = {
     email: "",
     senha: ""
@@ -36,7 +38,6 @@ export class HomePage extends AppAbstractBaseComponent {
 
     this.auth.refreshToken()
       .subscribe(response => {
-        console.log(response);
         this.auth.successfulLogin(response.headers.get('Authorization'));
         this.navCtrl.setRoot(this.paginas.categorias);
       },
@@ -47,16 +48,14 @@ export class HomePage extends AppAbstractBaseComponent {
   login() {
     this.auth.authenticate(this.creds)
       .subscribe(response => {
-        console.log('passou')
         this.auth.successfulLogin(response.headers.get('Authorization'));
         this.navCtrl.setRoot(this.paginas.categorias);
       },
-      error => {
-        console.log(error)
-      });
+      error => {});
   }
 
   signup() {
+    
     this.navCtrl.push(this.paginas.signup);
   }
 }

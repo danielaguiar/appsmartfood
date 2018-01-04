@@ -17,6 +17,6 @@
         <ion-input type="password" [(ngModel)]="creds.senha" name = "senha"></ion-input>
     </ion-item>
     <button ion-button block (click)="login()" >{{frmLogin.btn.enter}}</button>
-    <button ion-button block outline >{{frmLogin.btn.register}}</button>
+    <button ion-button block outline (click)="signup()">{{frmLogin.btn.register}}</button>
     </form>
 </ion-content>
