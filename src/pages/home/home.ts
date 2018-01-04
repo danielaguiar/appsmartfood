@@ -12,22 +12,22 @@ import { AppAbstractBaseComponent } from '../../app/app-abstract-base.component'
 })
 export class HomePage extends AppAbstractBaseComponent {
 
-  creds : CredenciaisDTO = {
+  creds: CredenciaisDTO = {
     email: "",
     senha: ""
   };
 
   constructor(
-    public navCtrl: NavController, 
+    public navCtrl: NavController,
     public menu: MenuController,
     public auth: AuthService) {
-      super();
+    super();
   }
 
   ionViewWillEnter() {
     this.menu.swipeEnable(false);
   }
-    
+
   ionViewDidLeave() {
     this.menu.swipeEnable(true);
   }
@@ -46,12 +46,15 @@ export class HomePage extends AppAbstractBaseComponent {
   login() {
     this.auth.authenticate(this.creds)
       .subscribe(response => {
+        console.log('passou')
         this.auth.successfulLogin(response.headers.get('Authorization'));
+        this.navCtrl.setRoot(this.paginas.categorias);
       },
-      error => console.log(error));    
-      this.navCtrl.setRoot(this.paginas.categorias);
+      error => {
+        console.log(error)
+      });
   }
- 
+
   signup() {
     this.navCtrl.push(this.paginas.signup);
   }
