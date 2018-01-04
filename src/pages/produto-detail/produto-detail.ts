@@ -3,20 +3,25 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { ProdutoDTO } from '../../models/produto.dto';
 import { ProdutoService } from '../../services/domain/produto.service';
 import { API_CONFIG } from '../../config/api.config';
+import { CartService } from '../../services/domain/cart.service';
+import { AppAbstractBaseComponent } from '../../app/app-abstract-base.component';
 
 @IonicPage()
 @Component({
   selector: 'page-produto-detail',
   templateUrl: 'produto-detail.html',
 })
-export class ProdutoDetailPage {
+export class ProdutoDetailPage extends AppAbstractBaseComponent {
 
   item: ProdutoDTO;
 
   constructor(
-    public navCtrl: NavController, 
+    public navCtrl: NavController,
     public navParams: NavParams,
-    public produtoService: ProdutoService) {
+    public produtoService: ProdutoService,
+    public cartService: CartService
+  ) {
+    super();
   }
 
   ionViewDidLoad() {
@@ -26,7 +31,7 @@ export class ProdutoDetailPage {
         this.item = response;
         this.getImageUrlIfExists();
       },
-      error => {});
+      error => { });
   }
 
   getImageUrlIfExists() {
@@ -34,11 +39,11 @@ export class ProdutoDetailPage {
       .subscribe(response => {
         this.item.imageUrl = `${API_CONFIG.bucketBaseUrl}/prod${this.item.id}.jpg`;
       },
-      error => {});
+      error => { });
   }
 
   addToCart(produto: ProdutoDTO) {
-    //this.cartService.addProduto(produto);
-    this.navCtrl.setRoot('CartPage');
+    this.cartService.addProduto(produto);
+    this.navCtrl.setRoot(this.paginas.cart);
   }
 }
