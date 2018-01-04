@@ -8,7 +8,7 @@ import { AppAbstractBaseComponent } from './app-abstract-base.component';
 @Component({
   templateUrl: 'app.html'
 })
-export class MyApp extends AppAbstractBaseComponent{
+export class MyApp extends AppAbstractBaseComponent {
   @ViewChild(Nav) nav: Nav;
 
   rootPage: string = 'HomePage';
