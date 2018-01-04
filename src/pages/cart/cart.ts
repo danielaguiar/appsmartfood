@@ -1,11 +1,13 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { CartItem } from '../../models/cart-item';
+
+
 import { ProdutoService } from '../../services/domain/produto.service';
 import { API_CONFIG } from '../../config/api.config';
+import { CartItem } from '../../models/cart-item';
 import { CartService } from '../../services/domain/cart.service';
-import { ProdutoDTO } from '../../models/produto.dto';
 import { AppAbstractBaseComponent } from '../../app/app-abstract-base.component';
+import { ProdutoDTO } from '../../models/produto.dto';
 
 @IonicPage()
 @Component({
@@ -42,19 +44,19 @@ export class CartPage extends AppAbstractBaseComponent {
   }  
 
   removeItem(produto: ProdutoDTO) {
-    //this.items = this.cartService.removeProduto(produto).items;
+    this.items = this.cartService.removeProduto(produto).items;
   }
 
   increaseQuantity(produto: ProdutoDTO) {
-    //this.items = this.cartService.increaseQuantity(produto).items;
+    this.items = this.cartService.increaseQuantity(produto).items;
   }
 
   decreaseQuantity(produto: ProdutoDTO) {
-    //this.items = this.cartService.decreaseQuantity(produto).items;
+    this.items = this.cartService.decreaseQuantity(produto).items;
   }
 
   total() : number {
-    //return this.cartService.total();
+    return this.cartService.total();
   }  
 
   goOn() {

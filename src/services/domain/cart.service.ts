@@ -1,11 +1,9 @@
-import { ProdutoDTO } from './../../models/produto.dto';
-import { StorageService } from './../storage.service';
-import { HttpClient } from "@angular/common/http";
-import { Observable } from "rxjs/Rx";
 import { Injectable } from '@angular/core';
+import { HttpClient } from "@angular/common/http";
 
-import { API_CONFIG } from '../../config/api.config';
-import { CidadeDTO } from './../../models/cidade.dto';
+
+import { StorageService } from './../storage.service';
+import { ProdutoDTO } from './../../models/produto.dto';
 import { Cart } from "../../models/cart";
 
 
@@ -29,13 +27,58 @@ export class CartService {
         return cart;
     }
 
-    addProduto(produto: ProdutoDTO): Cart{
+    addProduto(produto: ProdutoDTO): Cart {
         let cart = this.getCart();
-        let position = cart.items.findIndex(x => x.produto.id==produto.id);
-        if (position==-1){
-            cart.items.push({quantidade:1, produto: produto});
+        let position = cart.items.findIndex(x => x.produto.id == produto.id);
+        if (position == -1) {
+            cart.items.push({ quantidade: 1, produto: produto });
         }
         this.storage.setCart(cart);
         return cart;
     }
+
+    removeProduto(produto: ProdutoDTO): Cart {
+        let cart = this.getCart();
+        let position = cart.items.findIndex(x => x.produto.id == produto.id);
+        if (position != -1) {
+            cart.items.splice(position, 1);
+        }
+        this.storage.setCart(cart);
+        return cart;
+    }
+
+    increaseQuantity(produto: ProdutoDTO): Cart {
+        let cart = this.getCart();
+        let position = cart.items.findIndex(x => x.produto.id == produto.id);
+        if (position != -1) {
+            cart.items[position].quantidade++;
+        }
+        this.storage.setCart(cart);
+        return cart;
+    }
+
+    decreaseQuantity(produto: ProdutoDTO): Cart {
+        let cart = this.getCart();
+        let position = cart.items.findIndex(x => x.produto.id == produto.id);
+        if (position != -1) {
+            cart.items[position].quantidade--;
+        }
+        this.storage.setCart(cart);
+        return cart;
+    }
+
+    
+    total(): number {
+        let cart = this.getCart();
+        let sum =0;
+        for(var i=0;i< cart.items.length;i++){
+            sum+=cart.items[i].produto.preco * cart.items[i].quantidade;
+        }
+        return sum;
+    }
+
+    
+
+
+
 }
