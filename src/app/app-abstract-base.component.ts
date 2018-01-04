@@ -10,7 +10,8 @@ export abstract class AppAbstractBaseComponent {
         home: 'HomePage',
         categorias: 'CategoriasPage',
         profile: 'ProfilePage',
-        signup: 'SignupPage'
+        signup: 'SignupPage',
+        produtos: 'ProdutosPage'
     };
 
 
