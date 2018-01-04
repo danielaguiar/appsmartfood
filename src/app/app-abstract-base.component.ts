@@ -11,7 +11,8 @@ export abstract class AppAbstractBaseComponent {
         categorias: 'CategoriasPage',
         profile: 'ProfilePage',
         signup: 'SignupPage',
-        produtos: 'ProdutosPage'
+        produtos: 'ProdutosPage',
+        produtoDetail: 'ProdutoDetailPage'
     };
 
 

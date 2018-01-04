@@ -14,6 +14,7 @@ import { AuthService } from './../services/auth.service';
 import { HttpClientModule } from '@angular/common/http';
 
 import { ErrorInterceptorProvider} from '../interceptors/error-interceptor';
+import { ProdutoService } from '../services/domain/produto.service';
 
 
 @NgModule({
@@ -38,7 +39,8 @@ import { ErrorInterceptorProvider} from '../interceptors/error-interceptor';
     CategoriaService,
     AuthService,
     StorageService,
-    ClienteService
+    ClienteService,
+    ProdutoService
   ]
 })
 export class AppModule {}

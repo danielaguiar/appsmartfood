@@ -35,6 +35,6 @@ export class CategoriasPage extends AppAbstractBaseComponent {
   }
 
   showProdutos(categoria_id : string) {
-    this.navCtrl.push('ProdutosPage', {categoria_id: categoria_id});    
+    this.navCtrl.push(this.paginas.produtos, {categoria_id: categoria_id});    
   }
 }
