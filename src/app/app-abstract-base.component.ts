@@ -1,6 +1,9 @@
 import { FormGroup } from '@angular/forms';
 export abstract class AppAbstractBaseComponent {
 
+    constructor(){
+        
+    }
     protected formGroup: FormGroup;
 
     public paginas: any = {

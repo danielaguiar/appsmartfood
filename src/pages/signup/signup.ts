@@ -16,7 +16,7 @@ import { CidadeService } from '../../services/domain/cidade.service';
 })
 export class SignupPage extends AppAbstractBaseComponent {
 
-  
+
   estados: EstadoDTO[];
   cidades: CidadeDTO[];
 
@@ -55,7 +55,7 @@ export class SignupPage extends AppAbstractBaseComponent {
         this.formGroup.controls.estadoId.setValue(this.estados[0].id);
         this.updateCidades();
       },
-      error => {});
+      error => { });
   }
 
   updateCidades() {
@@ -65,17 +65,15 @@ export class SignupPage extends AppAbstractBaseComponent {
         this.cidades = response;
         this.formGroup.controls.cidadeId.setValue(null);
       },
-      error => {});
+      error => { });
   }
 
   signupUser() {
-    /*
     this.clienteService.insert(this.formGroup.value)
       .subscribe(response => {
-        this.showInsertOk();
-      },
-      error => {});
-     */
+        this.showInsertOk()
+      }
+      , error => { });
   }
 
   showInsertOk() {
