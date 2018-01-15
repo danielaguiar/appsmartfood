@@ -15,7 +15,7 @@ export class HomePage extends AppAbstractBaseComponent {
 
 
   creds: CredenciaisDTO = {
-    email: "",
+    login: "",
     senha: ""
   };
 
@@ -46,6 +46,7 @@ export class HomePage extends AppAbstractBaseComponent {
   }
 
   login() {
+    console.log('logando')
     this.auth.authenticate(this.creds)
       .subscribe(response => {
         this.auth.successfulLogin(response.headers.get('Authorization'));

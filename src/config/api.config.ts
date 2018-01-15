@@ -1,4 +1,4 @@
 export const API_CONFIG = {
-    baseUrl: "http://localhost:8080",
-    bucketBaseUrl: "https://s3-sa-east-1.amazonaws.com/curso-spring-ionic"
+    baseUrl: "https://paladarfit.herokuapp.com",
+    bucketBaseUrl: "https://s3.us-east-2.amazonaws.com/paladarfit"
 }
